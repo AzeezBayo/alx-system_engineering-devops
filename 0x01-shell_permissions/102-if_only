@@ -1,2 +1,2 @@
 #!/bin/bash
-sudo -U guillaume chown betty hello
+sudo --user=guillaume chown betty hello
