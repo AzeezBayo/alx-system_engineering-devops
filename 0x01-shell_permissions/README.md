@@ -12,3 +12,4 @@ Eleventh line mirrors permision between two files
 Twelveth line adds execute permission to all subdirectories for users
  Thriteenth line creates a directory called my_dir with permissions 751 in the working directory
 Fourteenth line changes the group owner to school for the file hello
+line fifteen changes the owner to vincent and the group owner to staff for all the files
