@@ -1,2 +1,2 @@
 #!/bin/bash
-tail -n 29 iacta | tail -l
+ls >>  iacta | tail -l
