@@ -1,2 +1,2 @@
 #!/bin/bash
-lpr > "Hello World" 
+less "Hello World" > 0-hello_world
