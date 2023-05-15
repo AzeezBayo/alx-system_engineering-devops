@@ -1,2 +1,2 @@
 #!/bin/bash
-ls >> iacta
+tail -n 1 test | tail -l
