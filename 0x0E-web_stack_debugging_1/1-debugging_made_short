@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# debugging nginx (service (init) must say that nginx is not running)
-sed -i 's/8080/80/g' /etc/nginx/sites-enabled/default
-service nginx restart
-pkill -o nginx
+# same as task 0 but -f added to ln to forcefully remove the file if it exists
+ln -sf /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
+sudo service nginx restart
+rm /run/nginx.pid

@@ -1,1 +1,2 @@
-0x04-loops_conditions_and_parsing markdown
+# Bash shell Loops, conditions and parsing
+![](https://cdn.educba.com/academy/wp-content/uploads/2019/12/Loops-in-Shell-Scripting.jpg)
