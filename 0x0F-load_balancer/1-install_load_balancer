@@ -6,7 +6,7 @@
 
 # Install and configure HAproxy on my lb-01 server.
 sudo apt-get -y update
-apt-get -y install haproxy
+sudo apt-get -y install haproxy
 
 # edit config file
 server_config=\
@@ -17,8 +17,8 @@ frontend  AzeezBayo_frontend
         default_backend AzeezBayo_backend
 backend AzeezBayo_backend
         balance roundrobin
-        server 300336-web-01 34.207.190.175:80 check
-        server 300336-web-02 35.175.128.34:80 check
+        server 300336-web-01 18.233.64.167:80 check
+        server 300336-web-02 34.227.93.103:80 check
 "
 echo "$server_config" | sudo tee -a /etc/haproxy/haproxy.cfg
 
