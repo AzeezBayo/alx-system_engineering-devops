@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+# Web-01 login commands
+
+# Setting up the SSH agent
+eval $("ssh-agent")
+
+# Path to identityFile
+ssh-add ~/.ssh/school
+
+# Username and IP Address 
+ssh ubuntu@54.160.97.133
+
+#Install snapd
+sudo apt update
+sudo apt install snapd
+sudo snap install snap
+
+#Remove certbot OS package
+sudo apt-get remove certbot
+
+#Install certbot
+sudo snap install --classic certbot
+
+#Ensuring certbot runs
+sudo ln -s /snap/bin/certbot /usr/bin/certbot
+
+#Getting the certificate
+sudo certbot certonly --nginx
+
+#Testing for auto-renewal
+sudo certbot renew --dry-run
+

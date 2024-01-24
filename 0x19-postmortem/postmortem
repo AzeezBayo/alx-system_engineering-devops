@@ -1,0 +1,33 @@
+Issue Summary
+
+From 11:19 PM to 11:48 PM WAT, requests to www.azeezbayo.tech result in 404 error response messages.  
+The issue affected 100% of traffic to this server. I could not access my web page. 
+The root cause of this outage was multiple times installation of nginx on the server.
+Timeline (West African Time)
+11:19 PM: Server reconfiguration begins
+11:40 PM: Successful configuration
+11:41 PM: Server restarts begin
+11:48 PM: Nginx server starts
+
+Root Cause
+
+At11:15 PM WAT, I mistakenly installed nginx web server twice. Causing the server memory to lag.  
+The servers began repeatedly throwing 4040 error.
+ 
+Resolution and recovery
+
+At 11:15 PM WAT, the monitoring systems alerted me engineer who investigated and quickly escalated the issue. 
+By 11:19 PM WAT, I identified the problem.
+
+
+Corrective and Preventative Measures
+
+In the last two weeks, I have conducted an internal review on the server. 
+The following are actions to help prevent recurrence and improve response times:
+Improve process for auditing all high-risk configuration options.
+Develop better mechanism for quickly delivering status notifications during incidents.
+
+Sincerely,
+Azeez Bayo
+Software engineer
+
