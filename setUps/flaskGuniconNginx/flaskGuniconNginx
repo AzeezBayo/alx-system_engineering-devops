@@ -1,0 +1,37 @@
+#Installing components
+sudo apt-get update
+sudo apt-get install python3-dev python3-pip nginx
+
+#Installing virtual environment
+sudo pip install virtualenv
+
+#Setting up directory and virtual env
+mkdir myapp
+cd myapp
+
+Setting up virtualenv called env
+virtualenv env
+
+#Activating vitual environment
+source env/bin/activate
+
+#To deactivate virtualenv
+deactivate
+
+#Installing uWSGI server
+pip install uwsgi
+
+
+#Setting up flask app and gunicorn
+pip install gunicorn flask
+
+
+#Create your flask app
+vi ~/myapp/app.py
+
+#Enabling UFW firewall
+sudo ufw enable
+sudo ufw status
+
+
+
