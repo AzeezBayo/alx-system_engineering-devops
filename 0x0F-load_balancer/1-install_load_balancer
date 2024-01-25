@@ -1,32 +1,55 @@
 #!/usr/bin/env bash
-# Create a script to install and configure HAProxy on lb-01 server
-# Configure HAProxy to send traffic to web-01 and web-02 servers
-# Distribute requests using a roundrobin algorithm
-# Make sure that HAProxy can be managed via an init script
+# install load balancer
 
-# Install and configure HAproxy on my lb-01 server.
-sudo apt-get -y update
-sudo apt-get -y install haproxy
 
-# edit config file
+echo -e "Updating and doing some minor checks...\n"
+
+function install() {
+	command -v "$1" &> /dev/null
+
+	#shellcheck disable=SC2181
+	if [ $? -ne 0 ]; then
+		echo -e "	Installing: $1\n"
+		sudo apt-get update -y -qq && \
+			sudo apt-get install -y "$1" -qq
+		echo -e "\n"
+	else
+		echo -e "	${1} is already installed.\n"
+	fi
+}
+
+install haproxy #install haproxy
+
+echo -e "\nSetting up some minor stuff.\n"
+
+# backup default server config file
+sudo cp /etc/haproxy/haproxy.cfg haproxy_default.backup
+
 server_config=\
 "
-frontend  AzeezBayo_frontend
-        bind *:80
-        mode http
-        default_backend AzeezBayo_backend
-backend AzeezBayo_backend
-        balance roundrobin
-        server 300336-web-01 34.207.190.175:80 check
-        server 300336-web-02 35.175.128.34:80 check
+defaults
+  mode http
+  timeout client 15s
+  timeout connect 10s
+  timeout server 15s
+  timeout http-request 10s
+frontend azeezbayo-frontend
+    bind *:80
+    default_backend azeezbayo-backend
+backend azeezbayo-backend
+    balance roundrobin
+    server 300336-web-01 54.160.97.133:80 check
+    server 300336-web-02 35.174.184.154:80 check
 "
-echo "$server_config" | sudo tee -a /etc/haproxy/haproxy.cfg
+
+# shellcheck disable=SC2154
+echo "$server_config" | sudo dd status=none of=/etc/haproxy/haproxy.cfg
 
 # enable haproxy to be started by init script
-echo "ENABLED=1" | sudo tee -a /etc/default/haproxy
+echo "ENABLED=1" | sudo dd status=none of=/etc/default/haproxy
 
-# Testing the HAproxy configuration file
-sudo haproxy -c -f /etc/haproxy/haproxy.cfg
-
-# Restart the Nginx service
-sudo service haproxy restart
+if [ "$(pgrep -c haproxy)" -le 0 ]; then
+	sudo service haproxy start
+else
+	sudo service haproxy restart
+fi
